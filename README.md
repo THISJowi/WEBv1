@@ -31,33 +31,40 @@ El proyecto consiste en:
 ## Estructura del Proyecto
 
 ```
-/home/joel/Documentos/web/
+
 ├── INICIO/
 │   ├── inicio.html
+│   ├── style.css
+│   ├── script.js
 │   └── TEST.HTML
 ├── MUSICAI/
 │   ├── musicai.html
 │   ├── style.css
+│   ├── script.js
 │   └── Registro/    // (Páginas relacionadas al registro o módulos específicos de música)
-├── RECURSOS/
-│   ├── img/         // Imágenes (perfil, portadas, etc.)
-│   ├── Login/
+├── Login/
 │   │   ├── Backend/
+│   │   │   ├── node_modules/
 │   │   │   ├── server.js   // Servidor Express (uso de MySQL, rutas, sesiones)
 │   │   │   ├── db.js       // Conexión a la base de datos
 │   │   │   └── package.json
 │   │   └── Frontend/      // Páginas de login, ajustes, y perfil
+│   │       ├── Login.html   // Servidor Express (uso de MySQL, rutas, sesiones)
+│   │       ├── style.css       // Conexión a la base de datos
+│   │       └── script.js
+├── RECURSOS (Drive: https://drive.google.com/file/d/17yZcotbbs_p9p5cbaBFPhxE2vCgK-lIo/view?usp=sharing)/
+│   ├── img/         // Imágenes (perfil, portadas, etc.)
 │   ├── music/       // Archivos de audio (.mp3)
 │   └── videos/      // Archivos de video (esta carpeta se ignora en Git)
 ├── profile.html     // Página de perfil del usuario
-├── script.js        // Funciones generales del frontend (reproductor, login, etc.)
-└── .gitignore       // Configurado para ignorar RECURSOS/videos y BACKUPS
+└── script.js        // Funciones generales del frontend (reproductor, login, etc.)
 ```
 
 ## Requisitos
 
 - [Node.js](https://nodejs.org/) (versión 14 o superior)
-- [MySQL](https://www.mysql.com/) (o [Microsoft SQL Server Express en Linux](https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu))
+- [MySQL](https://www.mysql.com/) (o [Microsoft SQL Server Express en Linux]
+- (https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu))
 - Git
 
 ## Instalación
