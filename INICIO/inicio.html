@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThisJowi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--poner de fondo un video-->
+    <div class="contenedor">
+        <video autoplay muted loop id="video-fondo">
+            <source src="/RECURSOS/videos/necesario.mp4" type="video/mp4">
+        </video>
+        <div class="oscurecer"></div>
+
+         <!--Texto y título de la web-->
+        <div class="content">
+            <h1>THI&dollar; JOWI</h1>
+            <p>The AI is the present now</p>
+        </div>
+    </div>
+    <!--botones para ir hacia MUSICA y a Video-->
+    <a id="user-section" href="/Login/Frontend/login.html">
+        <button class="btn3">LOGIN</button>
+    </a>
+    <a href="/MUSICAI/musicai.html">
+        <button class="btn1">MÚSICA</button>
+    </a>
+    <a href="/Videoai/html/videoai.html">
+        <button class="btn2">VIDEOAI</button>
+    </a>
+    <pre>
+    Soy Jowi, mejor conocido como THIS Jowi que es el nombre de usuario que siempre uso 
+    en mis redes sociales como pueden ser TikTok o YouTube. Soy un apasionado con la IA 
+    y con cosas relacionadas con la informática. Por eso, esta web contendrá una parte de
+    reproductor de música y otra de Videos para yo subir mis projectos de IA. En un futuro, 
+    planeo hacer que todo el mundo pueda subir sus canciones y videos de IA en esta web.
+    </pre>
+
+    <!-- Contenedor de la foto (inicialmente oculto) -->
+<div id="perfil">
+  <img id="fotoUsuario" src="/RECURSOS/img/perfil.png" alt="Foto de perfil">
+  <div id="dropdown">
+    <a href="./../RECURSOS/Login/Frontend/perfil.html">Nombre del usuario</a>
+    <a href="../RECURSOS/Login/Frontend/ajustes.html">Ajustes</a>
+    <a href="#" id="/logout">Cerrar sesión</a>
+  </div>
+</div>
+</body>
+</html>
+<style>
+    /* Estilos generales */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .contenedor{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+  }
+
+  #video-fondo{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .01s linear;
+  }
+
+  .oscurecer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+
+  .content{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #a78d78;
+      text-align: center;
+  }
+
+  content h1{
+      font-size: 3em;
+  }
+
+  .btn1 {
+      cursor: pointer;
+      position: absolute;
+      top: 9%;
+      left: 90%;
+      transform: translate(-90%, -90%);
+      color: #a78d78;
+      cursor: hand;
+      text-align: center;
+      background-color: transparent;
+      border: none;
+  }
+  .btn2 {
+      cursor: pointer;
+      position: absolute;
+      top: 9%;
+      left: 95%;
+      transform: translate(-90%, -90%);
+      cursor: hand;
+      color: #a78d78;
+      text-align: center;
+      background-color: transparent;
+      border: none;
+  }
+  .btn3 {
+      cursor: pointer;
+      position: absolute;
+      top: 9%;
+      left: 85%;
+      transform: translate(-90%, -90%);
+      cursor: hand;
+      color: #a78d78;
+      text-align: center;
+      background-color: transparent;
+      border: none;
+  }
+
+  pre {
+          position: absolute;
+          top: 75%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: #a78d78;
+          text-align: justify;
+          font-size: 1.2em; /* Ajusta el tamaño de la fuente si es necesario */
+  }
+
+  /* Contenedor de la foto/perfil */
+  #perfil {
+    position: absolute;
+    top: 10.5%; /* Igual que el botón LOGIN */
+    left: 84%; /* Igual que el botón LOGIN */
+    transform: translate(-90%, -90%);
+    display: none; /* Por defecto oculto */
+    text-align: center;
+    cursor: pointer;
+  }
+  #perfil img {
+    width: 30px;  /* Ajusta según lo que desees */
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #d3a367;
+  }
+  /* Menú desplegable */
+  #dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  #perfil:hover #dropdown {
+    display: block;
+  }
+  #dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  #dropdown a:hover {
+    background-color: #f3f3f3;
+  }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const perfil = document.getElementById('perfil');
+    const loginButton = document.getElementById('user-section');
+    
+    try {
+      const response = await fetch('/current-user');
+      const data = await response.json();
+      console.log("Datos de sesión:", data); // Para depuración
+
+      if (data.loggedIn === true) {
+        // Oculta el botón de login
+        loginButton.style.display = 'none';
+        // Muestra el contenedor de perfil
+        perfil.style.display = 'block';
+        // Actualiza dinámicamente el nombre de usuario
+        const userLink = document.querySelector('#dropdown a');
+        if (userLink) {
+          userLink.textContent = data.usuario;
+        }
+      } else {
+        // Sin sesión: mostramos el botón de login y ocultamos el perfil
+        loginButton.style.display = 'block';
+        perfil.style.display = 'none';
+      }
+    } catch (error) {
+      console.error("Error al verificar la sesión:", error);
+      // En error, mostramos el login y ocultamos el perfil
+      loginButton.style.display = 'block';
+      perfil.style.display = 'none';
+    }
+  });
+</script>

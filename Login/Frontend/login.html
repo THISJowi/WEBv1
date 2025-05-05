@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Registro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Video de fondo -->
+  <video autoplay muted loop id="video-fondo">
+    <source src="/RECURSOS/videos/necesario.mp4" type="video/mp4">
+    Tu navegador no soporta videos HTML5.
+  </video>
+  
+  <!-- Formulario de Login/Registro (solo se muestra si NO hay sesión) -->
+  <div class="container" id="container">
+    <div class="form-container" id="formContainer">
+      <!-- Formulario de Iniciar Sesión -->
+      <form class="form" id="loginForm" method="POST" action="/login">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" name="usuario" placeholder="Usuario" required />
+        <input type="password" name="password" placeholder="Contraseña" required />
+        <button type="submit">Entrar</button>
+        <div class="switch" onclick="toggleForm()">¿No tienes cuenta? Regístrate</div>
+      </form>
+      <!-- Formulario de Registro -->
+      <form class="form" id="registerForm" method="POST" action="/registro">
+        <h2>Registrarse</h2>
+        <input type="text" name="usuario" placeholder="Usuario" required />
+        <input type="password" name="password" placeholder="Contraseña" required />
+        <button type="submit">Crear cuenta</button>
+        <div class="switch" onclick="toggleForm()">¿Ya tienes cuenta? Inicia sesión</div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Contenedor de Perfil (se muestra SÓLO si hay sesión iniciada) -->
+  <div id="perfil">
+    <img id="fotoUsuario" src="/RECURSOS/img/perfil.png" alt="Foto de perfil">
+    <h3 id="nombreUsuario"></h3>
+    <a href="/logout" id="logout">Cerrar sesión</a>
+  </div>  
+</body>
+</html>
+<script src="script.js"></script>

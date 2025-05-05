@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajustes de Perfil</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f1ef;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #d3a367;
+      margin-bottom: 20px;
+    }
+    /* Drag-drop area */
+    #drop-area {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+    #drop-area.hover {
+      border-color: #d3a367;
+      color: #d3a367;
+    }
+    /* Estilos del formulario */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px;
+      background: #d3a367;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #b7813b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ajustes de Perfil</h1>
+    <!-- Área drag-drop para la imagen -->
+    <div id="drop-area">
+      Arrastra y suelta tu imagen aquí o haz clic para seleccionar un archivo.
+      <input type="file" id="fileElem" accept="image/*" style="display:none">
+    </div>
+    <!-- Formulario para actualizar datos -->
+    <form action="/update-profile" method="POST" enctype="multipart/form-data">
+      <!-- Campo oculto para almacenar la imagen en el servidor -->
+      <input type="hidden" name="fotoPerfil" id="fotoPerfil">
+      
+      <div>
+        <label for="usuario">Nombre de Usuario:</label>
+        <input type="text" id="usuario" name="usuario" placeholder="Deja en blanco para mantener el actual">
+      </div>
+      <div>
+        <label for="actualPassword">Contraseña Actual (requerido si cambias la contraseña):</label>
+        <input type="password" id="actualPassword" name="actualPassword" placeholder="Ingresa tu contraseña actual">
+      </div>
+      <div>
+        <label for="newPassword">Nueva Contraseña:</label>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Deja en blanco para mantener la actual">
+      </div>
+      <button type="submit">Guardar Cambios</button>
+    </form>
+  </div>
+
+  <script>
+    // Drag-drop básico para subir imagenes
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('fileElem');
+    const fotoPerfil = document.getElementById('fotoPerfil');
+
+    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, preventDefaults, false)
+    });
+
+    function preventDefaults (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    ;['dragenter', 'dragover'].forEach(eventName => {
+      dropArea.addEventListener(eventName, () => dropArea.classList.add('hover'), false)
+    });
+
+    ;['dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, () => dropArea.classList.remove('hover'), false)
+    });
+
+    dropArea.addEventListener('drop', handleDrop, false);
+    dropArea.addEventListener('click', () => fileInput.click(), false);
+    fileInput.addEventListener('change', handleFiles, false);
+
+    function handleDrop(e) {
+      let dt = e.dataTransfer;
+      let files = dt.files;
+      handleFiles({ target: { files } });
+    }
+
+    function handleFiles(e) {
+      const files = e.target.files;
+      if (files.length > 0) {
+        // Se toma el primer archivo ya que normalmente se sube una sola imagen
+        const file = files[0];
+        // Opcional: Mostrar vista previa o validar tipo y tamaño
+        // Por ejemplo, leemos la imagen y la pasamos como base64 al campo oculto
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          fotoPerfil.value = reader.result; // Guarda la imagen en formato base64
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+</html>

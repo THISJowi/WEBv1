@@ -1,0 +1,51 @@
+/* Estilos generales */
+* { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body, html { height: 100%; margin: 0; }
+/* Video de fondo */
+#video-fondo {
+  position: fixed; top: 0; left: 0;
+  min-width: 100%; min-height: 100%;
+  z-index: -1; object-fit: cover;
+}
+/* Contenedor del formulario de login/registro */
+.container {
+  width: 380px; margin: auto; margin-top: 8%;
+  background: rgba(41, 28, 14, 0.9);
+  border-radius: 20px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  overflow: hidden; transition: 0.5s;
+  display: block;
+}
+.form-container {
+  display: flex; width: 200%; transition: transform 0.5s ease-in-out;
+}
+.form {
+  padding: 30px; width: 50%;
+}
+h2 {
+  text-align: center; color: #d3a367; margin-bottom: 20px;
+}
+input {
+  width: 100%; padding: 12px; margin: 10px 0;
+  border: none; background: #f3e1cc; border-radius: 10px;
+}
+button {
+  width: 100%; padding: 12px;
+  background: #d3a367; color: white; border: none; border-radius: 10px;
+  cursor: pointer; font-weight: bold; transition: background 0.3s ease;
+}
+button:hover { background: #b7813b; }
+.switch {
+  text-align: center; margin-top: 10px; color: #f0e0d0;
+  cursor: pointer; font-size: 0.9em;
+}
+.switch:hover { color: #ffe1bd; }
+.login-active { transform: translateX(0%); }
+.register-active { transform: translateX(-50%); }
+/* Contenedor de perfil: se muestra solo si hay sesión */
+#perfil {
+  display: none; text-align: center; margin-top: 8%;
+}
+#perfil img {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 4px solid #d3a367;
+}
